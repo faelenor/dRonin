@@ -2,5 +2,6 @@
     <qresource prefix="/stm">
         <file>images/flyingf3.png</file>
         <file>images/discoveryf4.png</file>
+        <file>images/nucleo.jpg</file>
     </qresource>
 </RCC>

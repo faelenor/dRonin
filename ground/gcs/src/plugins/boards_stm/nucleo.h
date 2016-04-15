@@ -1,15 +1,14 @@
 /**
  ******************************************************************************
  *
- * @file       stmplugin.cpp
+ * @file       nucleo.h
  * @author     Tau Labs, http://taulabs.org, Copyright (C) 2013
- * @author     dRonin, http://dronin.org Copyright (C) 2015
  *
  * @addtogroup GCSPlugins GCS Plugins
  * @{
- * @addtogroup Boards_Stm STM boards support Plugin
+ * @addtogroup Boards_Stm Stm boards support Plugin
  * @{
- * @brief Plugin to support boards by STM
+ * @brief Plugin to support boards from STM
  *****************************************************************************/
 /*
  * This program is free software; you can redistribute it and/or modify
@@ -26,48 +25,27 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
+#ifndef NUCLEO_H
+#define NUCLEO_H
 
-#include "stmplugin.h"
-#include "flyingf3.h"
-#include "discoveryf4.h"
-#include "nucleo.h"
-#include <QtPlugin>
+#include <coreplugin/iboardtype.h>
 
+class IBoardType;
 
-StmPlugin::StmPlugin()
+class Nucleo : public Core::IBoardType
 {
-   // Do nothing
-}
+public:
+    Nucleo();
+    virtual ~Nucleo();
 
-StmPlugin::~StmPlugin()
-{
-   // Do nothing
-}
+    virtual QString shortName();
+    virtual QString boardDescription();
+    virtual bool queryCapabilities(BoardCapabilities capability);
+    virtual QStringList getSupportedProtocols();
+    virtual QPixmap getBoardPicture();
+    virtual QString getHwUAVO();
+    virtual int queryMaxGyroRate();
+};
 
-bool StmPlugin::initialize(const QStringList& args, QString *errMsg)
-{
-   Q_UNUSED(args);
-   Q_UNUSED(errMsg);
-   return true;
-}
 
-void StmPlugin::extensionsInitialized()
-{
-    /**
-     * Create the board objects here.
-     *
-     */
-    FlyingF3* flyingf3 = new FlyingF3();
-    addAutoReleasedObject(flyingf3);
-
-    DiscoveryF4* discoveryf4 = new DiscoveryF4();
-    addAutoReleasedObject(discoveryf4);
-
-    Nucleo* nucleo = new Nucleo();
-    addAutoReleasedObject(nucleo);
-}
-
-void StmPlugin::shutdown()
-{
-}
-
+#endif // NUCLEO_H

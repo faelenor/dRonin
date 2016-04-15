@@ -13,7 +13,7 @@
 # include "stm32f2xx.h"
 #elif defined(STM32F30X)
 # include "stm32f30x.h"
-#elif defined(STM32F4XX)
+#elif defined(STM32F4XX) || defined(STM32F446xx)
 # include "stm32f4xx.h"
 #else
 #error Unsupported CPU
